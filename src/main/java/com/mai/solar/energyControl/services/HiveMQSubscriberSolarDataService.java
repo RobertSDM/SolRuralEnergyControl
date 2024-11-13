@@ -3,8 +3,10 @@ package com.mai.solar.energyControl.services;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
 import com.mai.solar.energyControl.managers.HiveMqConnectionManager;
 import com.mai.solar.energyControl.models.interfaces.HiveMQSubscriber;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.nio.ByteBuffer;
@@ -25,7 +27,8 @@ public class HiveMQSubscriberSolarDataService implements HiveMQSubscriber {
         this.hiveMqConnectionManager = hiveMqConnectionManager;
     }
 
-    @PostConstruct
+    @EventListener(ContextRefreshedEvent.class)
+    @Order(2)
     public void connect(){
         hiveMqConnectionManager.subscriber(subscriberTopic, this::messageHandler);
     }

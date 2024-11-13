@@ -2,7 +2,9 @@ package com.mai.solar.energyControl.managers;
 
 import com.hivemq.client.mqtt.mqtt3.Mqtt3AsyncClient;
 import com.hivemq.client.mqtt.mqtt3.message.publish.Mqtt3Publish;
-import jakarta.annotation.PostConstruct;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Consumer;
@@ -16,7 +18,8 @@ public class HiveMqConnectionManager {
         this.mqtt3Client = mqtt3Client;
     }
 
-    @PostConstruct
+    @EventListener(ContextRefreshedEvent.class)
+    @Order(1)
     public void connect(){
         mqtt3Client.connect()
                 .whenComplete((conAck, throwable) -> {
