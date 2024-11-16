@@ -23,6 +23,7 @@ public class Farm {
     private String id;
     @Size(min = 3, max = 55, message = "The \"name\" length needs to be between 3 and 55")
     @NotEmpty(message = "The \"name\" cannot be null or blank")
+    @Column(unique = true)
     private String name;
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate subscriptionDate = LocalDate.now();
