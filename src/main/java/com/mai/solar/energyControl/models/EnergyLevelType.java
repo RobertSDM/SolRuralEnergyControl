@@ -18,6 +18,7 @@ public class EnergyLevelType {
         @Id
         @Enumerated(EnumType.STRING)
         @NotEmpty(message = "The \"type\" cannot be null or blank")
+        @Column(unique = true)
         private EnergyType type;
 
 }
