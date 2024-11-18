@@ -22,14 +22,14 @@ public class EnergyHistory {
     private LocalDate registryDate = LocalDate.now();
     private Double energyValue;
 
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<EnergyLevelType> levelTypeId;
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<SolarPanel> panelId;
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<Farm> farmId;
+    @JoinColumn(name = "energyLevelTypeId")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private EnergyLevelType levelTypeId;
+    @JoinColumn(name = "solarPanelId")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private SolarPanel panelId;
+    @JoinColumn(name = "farmId")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private Farm farmId;
 
 }
