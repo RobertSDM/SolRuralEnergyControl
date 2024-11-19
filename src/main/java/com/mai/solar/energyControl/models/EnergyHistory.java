@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @Entity
 @Table(name = "energy_history")
 @Getter
@@ -26,14 +27,14 @@ public class EnergyHistory {
     @Min(value = 0, message = "The \"energy value\" cannot be null or blank")
     private Double energyValue;
 
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<EnergyLevelType> levelTypeId;
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<SolarPanel> panelId;
-    @JoinColumn(name = "energyHistoryId", nullable = false)
-    @OneToMany(cascade = CascadeType.DETACH)
-    private List<Farm> farmId;
+    @JoinColumn(name = "energyLevelTypeId")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private EnergyLevelType levelTypeId;
+    @JoinColumn(name = "solarPanelId")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private SolarPanel panelId;
+    @JoinColumn(name = "farmId")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Farm farmId;
 
 }

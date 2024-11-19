@@ -1,5 +1,6 @@
 package com.mai.solar.energyControl.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "farm")
@@ -31,5 +33,14 @@ public class Farm {
     private Double hectareSize;
     @Min(0)
     private Integer panelCount;
+
+    @JsonIgnoreProperties("farms")
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "farm_solarPanel",
+            joinColumns = @JoinColumn(name = "farmId"),
+            inverseJoinColumns = @JoinColumn(name = "solarPanelId")
+    )
+    private List<SolarPanel> solarPanels;
 
 }

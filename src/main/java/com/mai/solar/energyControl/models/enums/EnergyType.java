@@ -11,7 +11,7 @@ import java.util.List;
 public enum EnergyType {
 
     HIGH("HIGH"),
-    NORMAL("NORMAL"),
+    MEDIUM("MEDIUM"),
     LOW("LOW");
 
     private final String type;
