@@ -1,9 +1,13 @@
 package com.mai.solar.energyControl.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 
 @Entity
@@ -20,8 +24,8 @@ public class SolarPanel {
     private Integer voltage;
     private Double price;
     private Integer cellQuantity;
-    @JoinColumn(name = "panelId", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
-    private Farm farm;
 
+    @JsonIgnoreProperties("solarPanels")
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "solarPanels")
+    private List<Farm> farms;
 }

@@ -1,5 +1,6 @@
 package com.mai.solar.energyControl.controller;
 
+import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
 import com.mai.solar.energyControl.services.SolarPanelService;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,13 @@ public class SolarPanelController {
 
     public SolarPanelController(SolarPanelService panelService) {
         this.panelService = panelService;
+    }
+
+    @PatchMapping("/{panelId}/farm/{farmId}")
+    private ResponseEntity<Farm> associateFarm(@PathVariable String panelId, @PathVariable String farmId) throws Exception {
+        panelService.associateFarm(panelId, farmId);
+        return ResponseEntity.ok().build();
+
     }
 
     @GetMapping

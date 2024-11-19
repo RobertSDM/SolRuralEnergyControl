@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "energy_history")
@@ -23,13 +22,13 @@ public class EnergyHistory {
     private Double energyValue;
 
     @JoinColumn(name = "energyLevelTypeId")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private EnergyLevelType levelTypeId;
     @JoinColumn(name = "solarPanelId")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private SolarPanel panelId;
     @JoinColumn(name = "farmId")
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Farm farmId;
 
 }

@@ -1,8 +1,10 @@
 package com.mai.solar.energyControl.controller;
 
 import com.mai.solar.energyControl.models.Farm;
+import com.mai.solar.energyControl.models.dto.FarmDTO;
 import com.mai.solar.energyControl.services.FarmService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,13 @@ public class FarmController {
 
     public FarmController(FarmService farmService) {
         this.farmService = farmService;
+    }
+
+    @PatchMapping("/{farmId}/panel/{panelId}")
+    private ResponseEntity<Farm> associateFarm(@PathVariable String panelId, @PathVariable String farmId) throws Exception {
+        farmService.associateSolarPanel(panelId, farmId);
+        return ResponseEntity.ok().build();
+
     }
 
     @GetMapping("/{id}")
@@ -46,7 +55,11 @@ public class FarmController {
     }
 
     @PostMapping
-    public ResponseEntity<Farm> create(@RequestBody Farm farm) {
+    public ResponseEntity<Farm> create(@RequestBody FarmDTO farmDTO) {
+
+        Farm farm = new Farm();
+
+        BeanUtils.copyProperties(farmDTO, farm);
 
         return ResponseEntity.ok(farmService.save(farm));
     }
@@ -65,7 +78,7 @@ public class FarmController {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
 }

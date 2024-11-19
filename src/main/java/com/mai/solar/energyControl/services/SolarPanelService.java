@@ -1,6 +1,8 @@
 package com.mai.solar.energyControl.services;
 
+import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
+import com.mai.solar.energyControl.repository.FarmRepository;
 import com.mai.solar.energyControl.repository.SolarPanelRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,16 +13,18 @@ import java.util.Optional;
 public class SolarPanelService {
 
     private final SolarPanelRepository panelRep;
+    private final FarmRepository farmRep;
 
-    public SolarPanelService(SolarPanelRepository panelRep) {
+    public SolarPanelService(SolarPanelRepository panelRep, FarmRepository farmRep) {
         this.panelRep = panelRep;
+        this.farmRep = farmRep;
     }
 
     public List<SolarPanel> getAll() {
         return panelRep.findAll();
     }
 
-    public Optional<SolarPanel> getById(String id){
+    public Optional<SolarPanel> getById(String id) {
         return panelRep.findById(id);
     }
 
@@ -32,8 +36,27 @@ public class SolarPanelService {
 
         Optional<SolarPanel> panel = panelRep.findById(id);
 
-            panelRep.delete(panel.orElse(new SolarPanel()));
+        panelRep.delete(panel.orElse(new SolarPanel()));
 
     }
-    
+
+    public void associateFarm(String panelId, String farmId) throws Exception {
+
+        Optional<Farm> farmOpt = farmRep.findById(farmId);
+        Optional<SolarPanel> panelOpt = panelRep.findById(panelId);
+
+        if (panelOpt.isEmpty() || farmOpt.isEmpty()) {
+            throw new Exception("Content not found");
+        }
+
+        Farm farm = farmOpt.get();
+        SolarPanel panel = panelOpt.get();
+
+        panel.getFarms().add(farm);
+        farm.getSolarPanels().add(panel);
+
+        panelRep.save(panel);
+        farmRep.save(farm);
+    }
+
 }
