@@ -3,7 +3,12 @@ package com.mai.solar.energyControl.controller;
 import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
 import com.mai.solar.energyControl.services.SolarPanelService;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +20,9 @@ import java.util.Optional;
 public class SolarPanelController {
 
     public final SolarPanelService panelService;
+
+    @Value("${pagination.default.size}")
+    private Integer defaultSize;
 
     public SolarPanelController(SolarPanelService panelService) {
         this.panelService = panelService;
@@ -31,7 +39,12 @@ public class SolarPanelController {
     public ResponseEntity<List<SolarPanel>> getAll(
             @RequestParam(name = "page", defaultValue = "0") Integer page
     ) {
-        Page<SolarPanel> panelsPage = panelService.getAll(page);
+
+
+        Pageable pageable = PageRequest.of(page, defaultSize);
+
+        Page<SolarPanel> panelsPage = panelService.getAll(pageable);
+
         List<SolarPanel> panels = panelsPage.getContent();
 
         if (!panels.isEmpty()) {

@@ -27,8 +27,7 @@ public class EnergyHistoryService {
     private final SolarPanelRepository panelRep;
     private final EnergyLevelTypeRepository energyLevelTypeRep;
 
-    @Value("${pagination.default.size}")
-    private Integer defaultSize;
+
 
     public EnergyHistoryService(EnergyHistoryRepository energyHistoryRep, FarmRepository farmRep, SolarPanelRepository panelRep, EnergyLevelTypeRepository energyLevelTypeRep) {
         this.energyHistoryRep = energyHistoryRep;
@@ -40,9 +39,8 @@ public class EnergyHistoryService {
     public List<EnergyHistory> getAll(){
         return this.energyHistoryRep.findAll();
     }
-
-    public Page<EnergyHistory> getAll(Integer page){
-        Pageable pageable = PageRequest.of(page, defaultSize);
+  
+    public Page<EnergyHistory> getAll(Pageable pageable){
 
         return this.energyHistoryRep.findAll(pageable);
     }

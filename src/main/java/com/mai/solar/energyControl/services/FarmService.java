@@ -31,8 +31,8 @@ public class FarmService {
         return farmRep.findAll();
     }
 
-    public Page<Farm> getAll(Integer page) {
-        Pageable pageable = PageRequest.of(page, defaultSize);
+    public Page<Farm> getAll(Pageable pageable) {
+
 
         return this.farmRep.findAll(pageable);
     }
