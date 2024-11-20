@@ -39,8 +39,9 @@ public class EnergyHistoryService {
     public List<EnergyHistory> getAll(){
         return this.energyHistoryRep.findAll();
     }
-
+  
     public Page<EnergyHistory> getAll(Pageable pageable){
+
         return this.energyHistoryRep.findAll(pageable);
     }
 

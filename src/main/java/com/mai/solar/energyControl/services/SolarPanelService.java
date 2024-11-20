@@ -21,6 +21,8 @@ public class SolarPanelService {
 
 
 
+
+
     public SolarPanelService(SolarPanelRepository panelRep, FarmRepository farmRep) {
         this.panelRep = panelRep;
         this.farmRep = farmRep;
@@ -31,6 +33,7 @@ public class SolarPanelService {
     }
 
     public Page<SolarPanel> getAll(Pageable pageable) {
+
         return this.panelRep.findAll(pageable);
     }
 

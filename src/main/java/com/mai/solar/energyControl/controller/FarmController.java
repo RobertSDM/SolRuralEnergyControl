@@ -5,10 +5,12 @@ import com.mai.solar.energyControl.models.dto.FarmDTO;
 import com.mai.solar.energyControl.services.FarmService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,9 +53,11 @@ public class FarmController {
     public ResponseEntity<List<Farm>> getAll(
             @RequestParam(name = "page", defaultValue = "0") Integer page
     ) {
+
         Pageable pageable = PageRequest.of(page, defaultSize);
 
         Page<Farm> farmsPage = farmService.getAll(pageable);
+
         List<Farm> farms = farmsPage.getContent();
 
         if (!farms.isEmpty()) {
