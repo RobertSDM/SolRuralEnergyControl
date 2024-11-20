@@ -25,6 +25,15 @@ public class HiveMqConnectionManager {
                 .whenComplete((conAck, throwable) -> {
                     if (throwable != null) {
                         System.out.println("Connection failed, reason: " + throwable.getMessage());
+
+                        try {
+                            Thread.sleep(1000);
+                        }catch(InterruptedException e){
+                            System.out.println("Interrupted while waiting for connection");
+                        }
+
+                        connect();
+
                     }else{
                         System.out.println("Connected");
                     }

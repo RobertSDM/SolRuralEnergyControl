@@ -2,11 +2,9 @@ package com.mai.solar.energyControl.controller;
 
 import com.mai.solar.energyControl.models.EnergyHistory;
 import com.mai.solar.energyControl.services.EnergyHistoryService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +20,11 @@ public class EnergyHistoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EnergyHistory>> getAll() {
-        List<EnergyHistory> energyHistories = energyHistoryService.getAll();
+    public ResponseEntity<List<EnergyHistory>> getAll(
+            @RequestParam(name = "page", defaultValue = "0") Integer page
+    ) {
+        Page<EnergyHistory> energyHistoriesPage = energyHistoryService.getAll(page);
+        List<EnergyHistory> energyHistories = energyHistoriesPage.getContent();
 
         if (!energyHistories.isEmpty()) {
             return ResponseEntity.ok(

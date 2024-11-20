@@ -4,6 +4,10 @@ import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
 import com.mai.solar.energyControl.repository.FarmRepository;
 import com.mai.solar.energyControl.repository.SolarPanelRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +19,9 @@ public class FarmService {
     private final FarmRepository farmRep;
     private final SolarPanelRepository panelRep;
 
+    @Value("${pagination.default.size}")
+    private Integer defaultSize;
+
     public FarmService(FarmRepository farmRep, SolarPanelRepository panelRep) {
         this.farmRep = farmRep;
         this.panelRep = panelRep;
@@ -24,29 +31,35 @@ public class FarmService {
         return farmRep.findAll();
     }
 
+    public Page<Farm> getAll(Integer page) {
+        Pageable pageable = PageRequest.of(page, defaultSize);
+
+        return this.farmRep.findAll(pageable);
+    }
+
     public Optional<Farm> getById(String id){
-        return farmRep.findById(id);
+        return this.farmRep.findById(id);
     }
 
     public Farm save(Farm farm) {
-        return farmRep.save(farm);
+        return this.farmRep.save(farm);
     }
 
     public void delete(String id) throws Exception {
 
-        Optional<Farm> farm = farmRep.findById(id);
+        Optional<Farm> farm = this.farmRep.findById(id);
 
         if(farm.isEmpty()) {
             throw new Exception("Farm not found");
         }
 
-        farmRep.delete(farm.get());
+        this.farmRep.delete(farm.get());
 
     }
 
     public void associateSolarPanel(String farmId, String panelId) throws Exception {
         Optional<SolarPanel> panelOpt = panelRep.findById(panelId);
-        Optional<Farm> farmOpt = farmRep.findById(farmId);
+        Optional<Farm> farmOpt = this.farmRep.findById(farmId);
 
         if (panelOpt.isEmpty() || farmOpt.isEmpty()) {
             throw new Exception("Content not found");
@@ -58,7 +71,7 @@ public class FarmService {
         farm.getSolarPanels().add(panel);
         panel.getFarms().add(farm);
 
-        farmRep.save(farm);
+        this.farmRep.save(farm);
         panelRep.save(panel);
 
     }
