@@ -4,6 +4,10 @@ import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
 import com.mai.solar.energyControl.repository.FarmRepository;
 import com.mai.solar.energyControl.repository.SolarPanelRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +19,9 @@ public class SolarPanelService {
     private final SolarPanelRepository panelRep;
     private final FarmRepository farmRep;
 
+    @Value("${pagination.default.size}")
+    private Integer defaultSize;
+
     public SolarPanelService(SolarPanelRepository panelRep, FarmRepository farmRep) {
         this.panelRep = panelRep;
         this.farmRep = farmRep;
@@ -22,6 +29,12 @@ public class SolarPanelService {
 
     public List<SolarPanel> getAll() {
         return panelRep.findAll();
+    }
+
+    public Page<SolarPanel> getAll(Integer page) {
+        Pageable pageable = PageRequest.of(page, defaultSize);
+
+        return this.panelRep.findAll(pageable);
     }
 
     public Optional<SolarPanel> getById(String id) {

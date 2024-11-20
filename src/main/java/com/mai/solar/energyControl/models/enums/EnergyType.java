@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public enum EnergyType {
+public enum EnergyType  {
 
     HIGH("HIGH"),
     MEDIUM("MEDIUM"),

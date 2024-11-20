@@ -5,6 +5,7 @@ import com.mai.solar.energyControl.models.dto.FarmDTO;
 import com.mai.solar.energyControl.services.FarmService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,9 +42,12 @@ public class FarmController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Farm>> getAll() {
+    public ResponseEntity<List<Farm>> getAll(
+            @RequestParam(name = "page", defaultValue = "0") Integer page
+    ) {
 
-        List<Farm> farms = farmService.getAll();
+        Page<Farm> farmsPage = farmService.getAll(page);
+        List<Farm> farms = farmsPage.getContent();
 
         if (!farms.isEmpty()) {
             return ResponseEntity.ok(

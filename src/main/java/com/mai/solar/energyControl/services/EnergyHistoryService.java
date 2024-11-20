@@ -10,6 +10,10 @@ import com.mai.solar.energyControl.repository.EnergyHistoryRepository;
 import com.mai.solar.energyControl.repository.EnergyLevelTypeRepository;
 import com.mai.solar.energyControl.repository.FarmRepository;
 import com.mai.solar.energyControl.repository.SolarPanelRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +27,9 @@ public class EnergyHistoryService {
     private final SolarPanelRepository panelRep;
     private final EnergyLevelTypeRepository energyLevelTypeRep;
 
+    @Value("${pagination.default.size}")
+    private Integer defaultSize;
+
     public EnergyHistoryService(EnergyHistoryRepository energyHistoryRep, FarmRepository farmRep, SolarPanelRepository panelRep, EnergyLevelTypeRepository energyLevelTypeRep) {
         this.energyHistoryRep = energyHistoryRep;
         this.farmRep = farmRep;
@@ -32,6 +39,12 @@ public class EnergyHistoryService {
 
     public List<EnergyHistory> getAll(){
         return this.energyHistoryRep.findAll();
+    }
+
+    public Page<EnergyHistory> getAll(Integer page){
+        Pageable pageable = PageRequest.of(page, defaultSize);
+
+        return this.energyHistoryRep.findAll(pageable);
     }
 
     public Optional<EnergyHistory> getById(Long id){

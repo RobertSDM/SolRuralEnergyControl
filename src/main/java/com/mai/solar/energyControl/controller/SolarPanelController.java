@@ -3,6 +3,7 @@ package com.mai.solar.energyControl.controller;
 import com.mai.solar.energyControl.models.Farm;
 import com.mai.solar.energyControl.models.SolarPanel;
 import com.mai.solar.energyControl.services.SolarPanelService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,11 @@ public class SolarPanelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SolarPanel>> getAll() {
-        List<SolarPanel> panels = panelService.getAll();
+    public ResponseEntity<List<SolarPanel>> getAll(
+            @RequestParam(name = "page", defaultValue = "0") Integer page
+    ) {
+        Page<SolarPanel> panelsPage = panelService.getAll(page);
+        List<SolarPanel> panels = panelsPage.getContent();
 
         if (!panels.isEmpty()) {
             return ResponseEntity.ok(
