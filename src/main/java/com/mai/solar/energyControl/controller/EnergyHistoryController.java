@@ -2,7 +2,10 @@ package com.mai.solar.energyControl.controller;
 
 import com.mai.solar.energyControl.models.EnergyHistory;
 import com.mai.solar.energyControl.services.EnergyHistoryService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +18,9 @@ public class EnergyHistoryController {
 
     private final EnergyHistoryService energyHistoryService;
 
+    @Value("${pagination.default.size}")
+    private Integer defaultSize;
+
     public EnergyHistoryController(EnergyHistoryService energyHistoryService) {
         this.energyHistoryService = energyHistoryService;
     }
@@ -23,7 +29,10 @@ public class EnergyHistoryController {
     public ResponseEntity<List<EnergyHistory>> getAll(
             @RequestParam(name = "page", defaultValue = "0") Integer page
     ) {
-        Page<EnergyHistory> energyHistoriesPage = energyHistoryService.getAll(page);
+
+        Pageable pageable = PageRequest.of(page, defaultSize);
+
+        Page<EnergyHistory> energyHistoriesPage = energyHistoryService.getAll(pageable);
         List<EnergyHistory> energyHistories = energyHistoriesPage.getContent();
 
         if (!energyHistories.isEmpty()) {

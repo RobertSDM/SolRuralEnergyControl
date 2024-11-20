@@ -19,9 +19,6 @@ public class FarmService {
     private final FarmRepository farmRep;
     private final SolarPanelRepository panelRep;
 
-    @Value("${pagination.default.size}")
-    private Integer defaultSize;
-
     public FarmService(FarmRepository farmRep, SolarPanelRepository panelRep) {
         this.farmRep = farmRep;
         this.panelRep = panelRep;
@@ -31,8 +28,7 @@ public class FarmService {
         return farmRep.findAll();
     }
 
-    public Page<Farm> getAll(Integer page) {
-        Pageable pageable = PageRequest.of(page, defaultSize);
+    public Page<Farm> getAll(Pageable pageable) {
 
         return this.farmRep.findAll(pageable);
     }
