@@ -24,15 +24,14 @@ margin-top: 2rem;
 display: flex;
 gap: 1rem;
 flex-direction: column">
-    <div th:insert="~{fragments/FarmDashboardCard :: FarmDashboardCard(${farm})}"
+    <div th:insert="~{fragments/farmDashboardCard :: farmDashboardCard(${farm})}"
          th:each="farm : ${farms}"></div>
 </div>
 
 <div>
-    <button style="background-color: transparent;"><</button>
-    <span th:if="${param.page}" th:text="${}"></span>
-    <span th:unless="${param.page}" th:text="0"></span>
-    <button style="background-color: transparent;">></button>
+    <button th:disabled="${param.page <= 0}" style="background-color: transparent;"><</button>
+    <span   th:text="${param.page ?: 1}"></span>
+    <button th:hx-get="@{/?page=${param.page != null ? param.page + 1 : 1}}" th:disabled="${param.page >= farms.size() / 8}" style="background-color: transparent;">></button>
 </div>
 
 </body>
