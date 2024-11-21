@@ -10,7 +10,7 @@ insert into farm (id, name, panel_count, hectare_size, subscription_date) values
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32el6-7eee-4976-v237-921f7254d528', 'Locl Feliz', 10, 20, '2003-01-20');
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32em6-7eee-4976-v237-921f7254d528', 'Loal Feliz', 10, 20, '2003-01-20');
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32en6-7eee-4976-v237-921f7254d528', 'Lcal Feliz', 10, 20, '2003-01-20');
-insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eo6-7eee-4976-v237-921f7254d528', 'Local Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eo6-7eee-4976-v237-921f7254d528', 'L Feliz', 10, 20, '2003-01-20');
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32ep6-7eee-4976-v237-921f7254d528', 'Loc Feliz', 10, 20, '2003-01-20');
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eq6-7eee-4976-v237-921f7254d528', 'Lal Feliz', 10, 20, '2003-01-20');
 insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32er6-7eee-4976-v237-921f7254d528', 'Ll Feliz', 10, 20, '2003-01-20');
