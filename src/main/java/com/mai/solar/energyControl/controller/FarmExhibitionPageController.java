@@ -16,22 +16,22 @@ import java.util.List;
 
 @Controller
 @RequestMapping
-public class DashboardPageController {
+public class FarmExhibitionPageController {
 
     private final FarmService farmService;
 
     @Value("${pagination.default.size}")
     private Integer defaultSize;
 
-    public DashboardPageController(FarmService farmService) {
+    public FarmExhibitionPageController(FarmService farmService) {
         this.farmService = farmService;
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping("/farm-exhibition")
     public ModelAndView dashboard(
             @RequestParam(name = "page", defaultValue = "0") Integer page
     ) {
-        ModelAndView mv = new ModelAndView("dashboard");
+        ModelAndView mv = new ModelAndView("farm_exhibition");
         Pageable pageable = PageRequest.of(page, defaultSize);
 
         Page<Farm> farmsPage = farmService.getAll(pageable);

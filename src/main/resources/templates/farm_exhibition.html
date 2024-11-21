@@ -1,0 +1,39 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:with="cssFiles=${{'/css/farm_exhibition.css'}}, jsFiles=${{'/js/farm_exhibition.js'}}">
+    <head th:replace="~{fragments/head :: head(#{tab_title}, ${jsFiles}, ${cssFiles})}"></head>
+</th:block>
+<body style="display: flex;
+flex-direction: column;
+align-items: center;
+height: 100dvh">
+
+<header style="width: 100%; padding: 0 2rem">
+    <img th:src="@{'/assets/Logo Sol Rural.png'}"
+         th:alt="#{logo_alt}"
+         style="object-fit: contain;
+         aspect-ratio: 16/9;
+         height: 4rem"/>
+</header>
+
+
+<h2 th:text="#{page_title}" style="margin: 1rem auto 0 auto"></h2>
+
+<div style="width: 60%;
+margin-top: 2rem;
+display: flex;
+gap: 1rem;
+flex-direction: column">
+    <div th:insert="~{fragments/FarmDashboardCard :: FarmDashboardCard(${farm})}"
+         th:each="farm : ${farms}"></div>
+</div>
+
+<div>
+    <button style="background-color: transparent;"><</button>
+    <span th:if="${param.page}" th:text="${}"></span>
+    <span th:unless="${param.page}" th:text="0"></span>
+    <button style="background-color: transparent;">></button>
+</div>
+
+</body>
+</html>

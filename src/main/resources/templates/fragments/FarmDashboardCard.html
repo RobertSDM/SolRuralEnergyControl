@@ -1,11 +1,6 @@
 <div th:fragment="FarmDashboardCard(farm)" style="display: flex;flex-direction: column">
-    <span th:text="'Name: ' + ${farm.name}"></span>
-    <span th:text="'Panel Count: ' + ${farm.panelCount}"></span>
-    <span th:text="'Farm Size: ' + ${farm.hectareSize}"></span>
-    <div th:each="panel : ${farm.solarPanels}" style="display: flex">
-        <span th:text="${panel.price}"></span>
-        <span th:text="${panel.power}"></span>
-        <span th:text="${panel.voltage}"></span>
-        <span th:text="${panel.cellQuantity}"></span>
-    </div>
+    <span th:text="#{card_farm_name} + ': ' + ${farm.name}"></span>
+    <span th:text="#{card_farm_panelCount} + ': ' + ${farm.panelCount}"></span>
+    <span th:text="#{card_farm_farmSize} + ': ' + ${farm.hectareSize}"></span>
+    <span th:text="#{card_farm_solarPanelsCountPre} + ' ' + ${farm.solarPanels.size} + ' ' + #{card_farm_solarPanelsCountPos}"></span>
 </div>

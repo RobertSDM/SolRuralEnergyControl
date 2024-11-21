@@ -21,7 +21,7 @@ public class SpringSecurityConfig {
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/**", "/favicon.ico").permitAll()
                         .requestMatchers(HttpMethod.GET, "/farm", "/farm/{id}", "/solar-panel", "/solar-panel/{id}",
-                                "/energy-history", "/energy-history/{id}", "/dashboard", "/js/**", "/css/**", "/assets/**").permitAll()
+                                "/energy-history", "/energy-history/{id}", "/farm-exhibition", "/js/**", "/css/**", "/assets/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/farm", "/solar-panel").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/farm", "/solar-panel").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/farm/{id}", "/solar-panel/{id}").permitAll()
