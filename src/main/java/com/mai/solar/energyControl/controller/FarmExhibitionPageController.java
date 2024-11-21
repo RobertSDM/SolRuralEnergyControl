@@ -38,6 +38,7 @@ public class FarmExhibitionPageController {
         List<Farm> farms = farmsPage.getContent();
 
         mv.addObject("farms", farms);
+        mv.addObject("page", page);
 
         return mv;
     }
