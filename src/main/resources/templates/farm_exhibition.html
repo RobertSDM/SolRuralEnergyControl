@@ -1,0 +1,50 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:with="cssFiles=${{'/css/farm_exhibition.css'}}, jsFiles=${{'/js/farm_exhibition.js'}}">
+    <head th:replace="~{fragments/head :: head(#{tab_title}, ${jsFiles}, ${cssFiles})}"></head>
+</th:block>
+<body style="display: flex;
+flex-direction: column;
+align-items: center;
+height: 100dvh;
+padding-bottom: 10rem">
+
+<header style="width: 100%; padding: 0 2rem">
+    <a th:href="@{/farm-exhibition}">
+        <img th:src="@{'/assets/Logo Sol Rural.png'}"
+             th:alt="#{logo_alt}"
+             style="object-fit: contain;
+         aspect-ratio: 16/9;
+         height: 4rem"/>
+    </a>
+</header>
+
+
+<h2 th:text="#{page_title}" style="margin: 1rem auto 0 auto"></h2>
+
+<div th:if="${farms.size() > 0}" style="width: 60%;
+margin-top: 2rem;
+display: flex;
+height: 50rem;
+gap: 1rem;
+flex-direction: column;
+overflow-y: scroll">
+    <div th:insert="~{fragments/farmDashboardCard :: farmDashboardCard(${farm})}"
+         th:each="farm : ${farms}"></div>
+</div>
+<div th:unless="${farms.size() > 0}">
+    <p th:text="#{no_farm_found}"></p>
+</div>
+
+<div th:if="${farms.size() > 0}">
+    <a th:href="@{/farm-exhibition(page=${page != null ? page - 1 : 1})}"
+       th:class="${(page <= 0) ? 'link_disabled':''}"
+       style="background-color: transparent;">&lt;</a>
+    <span th:text="${page + 1}"></span>
+    <a th:href="@{/farm-exhibition(page=${page != null ? page + 1 : 1})}"
+       th:class="${(page >= farms.size() / 8) ? 'link_disabled' : ''}"
+       style="background-color: transparent;">&gt;</a>
+</div>
+
+</body>
+</html>

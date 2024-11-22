@@ -1,0 +1,7 @@
+@import url("main.css");
+
+.link_disabled{
+    color: gray;
+    pointer-events: none;
+    cursor: default;
+}
