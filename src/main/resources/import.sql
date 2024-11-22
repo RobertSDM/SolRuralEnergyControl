@@ -2,6 +2,19 @@ insert into energy_level_type (type) values ('LOW');
 insert into energy_level_type (type) values ('MEDIUM');
 insert into energy_level_type (type) values ('HIGH');
 
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('60a32ec6-7eee-4976-b937-921f7254d528', 'Fazendinha', 10, 20, '2003-01-20');
+insert into solar_panel (id, power, cell_quantity, price, voltage) values ('672afe56-3f7d-4eae-a499-140317f1396e', 10, 10, 10.0, 200);
+insert into solar_panel (id, power, cell_quantity, price, voltage) values ('572age56-3h7d-4eae-a499-140317f1396e', 10, 10, 10.0, 200);
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eh6-7eee-4976-v237-921f7254d528', 'Local Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32ei6-7eee-4976-v237-921f7254d528', 'Loca Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32el6-7eee-4976-v237-921f7254d528', 'Locl Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32em6-7eee-4976-v237-921f7254d528', 'Loal Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32en6-7eee-4976-v237-921f7254d528', 'Lcal Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eo6-7eee-4976-v237-921f7254d528', 'L Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32ep6-7eee-4976-v237-921f7254d528', 'Loc Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32eq6-7eee-4976-v237-921f7254d528', 'Lal Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32er6-7eee-4976-v237-921f7254d528', 'Ll Feliz', 10, 20, '2003-01-20');
+insert into farm (id, name, panel_count, hectare_size, subscription_date) values ('68j32ef6-7eee-4976-v237-921f7254d528', 'Local Fiz', 10, 20, '2003-01-20');
 
-INSERT INTO farm (id, name, subscription_date, hectare_size, panel_count) VALUES ('8abe6a90-bdf7-41b7-a103-96f81077f8e9', 'fazenda da justa', '2024-11-20', 20.0, 0);
-INSERT INTO solar_panel (id, power, voltage, price, cell_quantity) VALUES ('5eb17cbe-e673-45fd-9f42-db0a3bd9e5a0', 20, 500, 120.0, 20);
+insert into farm_solar_panel values ('60a32ec6-7eee-4976-b937-921f7254d528', '672afe56-3f7d-4eae-a499-140317f1396e');
+insert into farm_solar_panel values ('60a32ec6-7eee-4976-b937-921f7254d528', '572age56-3h7d-4eae-a499-140317f1396e');
