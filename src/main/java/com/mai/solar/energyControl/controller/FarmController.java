@@ -79,9 +79,11 @@ public class FarmController {
         return ResponseEntity.ok(farmService.save(farm));
     }
 
-    @PutMapping
-    public ResponseEntity<Farm> update(@RequestBody @Valid Farm farm) {
-        return ResponseEntity.ok(farmService.save(farm));
+    @PutMapping("/{id}")
+    public ResponseEntity<Farm> update(@RequestBody @Valid Farm farm, @PathVariable String id) {
+        farmService.update(farm, id);
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
