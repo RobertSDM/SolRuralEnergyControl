@@ -37,7 +37,13 @@ public class FarmService {
         return this.farmRep.findAll(pageable);
     }
 
-    public Optional<Farm> getById(String id){
+    public void update(Farm farm, String id) {
+
+        farm.setId(id);
+        farmRep.save(farm);
+    }
+
+    public Optional<Farm> getById(String id) {
         return this.farmRep.findById(id);
     }
 
@@ -49,7 +55,7 @@ public class FarmService {
 
         Optional<Farm> farm = this.farmRep.findById(id);
 
-        if(farm.isEmpty()) {
+        if (farm.isEmpty()) {
             throw new Exception("Farm not found");
         }
 

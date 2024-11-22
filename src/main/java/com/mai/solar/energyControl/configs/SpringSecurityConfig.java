@@ -20,10 +20,10 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/**", "/favicon.ico").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/farm", "/farm/{id}", "/solar-panel", "/solar-panel/{id}",
+                        .requestMatchers(HttpMethod.GET, "/","/farm", "/farm/{id}", "/solar-panel", "/solar-panel/{id}",
                                 "/energy-history", "/energy-history/{id}", "/farm-exhibition", "/js/**", "/css/**", "/assets/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/farm", "/solar-panel").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/farm", "/solar-panel").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/farm/{id}", "/solar-panel/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/farm/{id}", "/solar-panel/{id}").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/solar-panel/{panelId}/farm/{farmId}", "/farm/{farmId}/panel/{panelId}").permitAll()
                         .anyRequest().authenticated())

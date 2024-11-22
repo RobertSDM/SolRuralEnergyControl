@@ -72,15 +72,9 @@ public class SolarPanelController {
         return ResponseEntity.ok(panelService.save(solarPanel));
     }
 
-    @PutMapping
-    public ResponseEntity<SolarPanel> update(@RequestBody SolarPanel solarPanel) {
-        return ResponseEntity.ok(panelService.save(solarPanel));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<SolarPanel> delete(@PathVariable String id) {
-
-        panelService.delete(id);
+    @PutMapping("/{id}")
+    public ResponseEntity<SolarPanel> update(@RequestBody SolarPanel solarPanel, @PathVariable String id) {
+        panelService.update(solarPanel, id);
 
         return ResponseEntity.ok().build();
     }

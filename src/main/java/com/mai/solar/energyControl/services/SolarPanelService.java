@@ -20,7 +20,10 @@ public class SolarPanelService {
     private final FarmRepository farmRep;
 
 
-
+    public void update(SolarPanel panel, String id) {
+        panel.setId(id);
+        panelRep.save(panel);
+    }
 
 
     public SolarPanelService(SolarPanelRepository panelRep, FarmRepository farmRep) {
@@ -45,14 +48,6 @@ public class SolarPanelService {
         return panelRep.save(farm);
     }
 
-    public void delete(String id) {
-
-        Optional<SolarPanel> panel = panelRep.findById(id);
-
-        panelRep.delete(panel.orElse(new SolarPanel()));
-
-    }
-
     public void associateFarm(String panelId, String farmId) throws Exception {
 
         Optional<Farm> farmOpt = farmRep.findById(farmId);
@@ -65,11 +60,11 @@ public class SolarPanelService {
         Farm farm = farmOpt.get();
         SolarPanel panel = panelOpt.get();
 
-        panel.getFarms().add(farm);
         farm.getSolarPanels().add(panel);
 
         panelRep.save(panel);
         farmRep.save(farm);
     }
+
 
 }
