@@ -77,6 +77,9 @@ public class FarmService {
         farm.getSolarPanels().add(panel);
         panel.getFarms().add(farm);
 
+        farm.setId(farmId);
+        panel.setId(panelId);
+
         this.farmRep.save(farm);
         panelRep.save(panel);
 

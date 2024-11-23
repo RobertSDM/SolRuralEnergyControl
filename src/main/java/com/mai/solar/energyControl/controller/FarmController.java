@@ -32,7 +32,7 @@ public class FarmController {
 
     @PatchMapping("/{farmId}/panel/{panelId}")
     private ResponseEntity<Farm> associateFarm(@PathVariable String panelId, @PathVariable String farmId) throws Exception {
-        farmService.associateSolarPanel(panelId, farmId);
+        farmService.associateSolarPanel(farmId, panelId);
         return ResponseEntity.ok().build();
 
     }
